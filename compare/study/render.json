@@ -1,0 +1,253 @@
+{
+ "step_note": "step name comes from cases.json; last frame is always used",
+ "size_px": [
+  4096,
+  4096
+ ],
+ "view_height_mm": 1700.0,
+ "deform_scale": 10,
+ "joints": [
+  "J3",
+  "J6"
+ ],
+ "limits": {
+  "S11": [
+   -20,
+   20
+  ],
+  "MISES": [
+   0,
+   350
+  ],
+  "S22": [
+   -5,
+   5
+  ]
+ },
+ "units": {
+  "S11": "S11 [MPa]  (parallel to grain in timber)",
+  "MISES": "von Mises [MPa]",
+  "S22": "S22 [MPa]  (perpendicular to grain, material 2-direction)"
+ },
+ "outside": {
+  "S11": [
+   "#ff00ff",
+   "#00e5ff"
+  ],
+  "MISES": [
+   "#bdbdbd",
+   "#ff6a00"
+  ],
+  "S22": [
+   "#ff00ff",
+   "#00e5ff"
+  ]
+ },
+ "outside_note": "values below the lower limit = first colour, above the upper limit = second colour; steel/dowel over-limit = orange (not part of viridis)",
+ "spectra": {
+  "S11": [
+   "#68190e",
+   "#823719",
+   "#9e5524",
+   "#b8732f",
+   "#d4913a",
+   "#eeaf45",
+   "#ecb954",
+   "#cbae65",
+   "#aaa377",
+   "#899888",
+   "#688d9a",
+   "#4782ab"
+  ],
+  "MISES": [
+   "#440154",
+   "#482173",
+   "#433e85",
+   "#38598c",
+   "#2d708e",
+   "#25858e",
+   "#1e9b8a",
+   "#2ab07f",
+   "#52c569",
+   "#86d549",
+   "#c2df23",
+   "#fde725"
+  ],
+  "S22": [
+   "#68190e",
+   "#823719",
+   "#9e5524",
+   "#b8732f",
+   "#d4913a",
+   "#eeaf45",
+   "#ecb954",
+   "#cbae65",
+   "#aaa377",
+   "#899888",
+   "#688d9a",
+   "#4782ab"
+  ]
+ },
+ "groups": {
+  "timber": {
+   "classes": [
+    "timber"
+   ],
+   "variable": "S11"
+  },
+  "steel": {
+   "classes": [
+    "steel_corner",
+    "steel_inter"
+   ],
+   "variable": "MISES"
+  },
+  "interplate": {
+   "classes": [
+    "steel_inter"
+   ],
+   "variable": "MISES"
+  },
+  "dowel": {
+   "classes": [
+    "dowel"
+   ],
+   "variable": "MISES"
+  },
+  "timberperp": {
+   "classes": [
+    "timber"
+   ],
+   "variable": "S22"
+  }
+ },
+ "views": [
+  {
+   "name": "front",
+   "kind": "front",
+   "view_vector": [
+    0,
+    1,
+    0
+   ],
+   "up": [
+    0,
+    0,
+    1
+   ],
+   "groups": [
+    "timber",
+    "steel",
+    "interplate",
+    "timberperp"
+   ]
+  },
+  {
+   "name": "cutY35",
+   "kind": "cut",
+   "origin": [
+    0,
+    35,
+    0
+   ],
+   "normal": [
+    0,
+    -1,
+    0
+   ],
+   "view_vector": [
+    0,
+    1,
+    0
+   ],
+   "up": [
+    0,
+    0,
+    1
+   ],
+   "groups": [
+    "timber",
+    "timberperp"
+   ]
+  },
+  {
+   "name": "cutY70",
+   "kind": "cut",
+   "origin": [
+    0,
+    70,
+    0
+   ],
+   "normal": [
+    0,
+    -1,
+    0
+   ],
+   "view_vector": [
+    0,
+    1,
+    0
+   ],
+   "up": [
+    0,
+    0,
+    1
+   ],
+   "groups": [
+    "timber"
+   ]
+  },
+  {
+   "name": "iso3d",
+   "kind": "front",
+   "view_vector": [
+    0.55,
+    1.0,
+    -0.55
+   ],
+   "up": [
+    0,
+    0,
+    1
+   ],
+   "groups": [
+    "dowel"
+   ]
+  }
+ ],
+ "global_views": [
+  {
+   "name": "front",
+   "group": "timber",
+   "center": [
+    -4060.0,
+    70.0,
+    3787.0
+   ],
+   "view_height_mm": 13000.0,
+   "deform_scale": 10,
+   "view_vector": [
+    0,
+    1,
+    0
+   ],
+   "up": [
+    0,
+    0,
+    1
+   ],
+   "note": "whole structure, GLM (timber) elements only, S11; B1/B2 main beams have no recoverable output and stay blank"
+  }
+ ],
+ "auto_limit_groups": [
+  "interplate"
+ ],
+ "auto_limit_note": "groups listed here use 0..max(observed von Mises over all cases, per joint) rounded up, instead of the fixed limits",
+ "timber_scale_note": "compression end (90,10,8) -> mid (252,190,75) -> tension end (55,125,180); RGB-interpolated, 12 intervals",
+ "framing_groups": [
+  "steel",
+  "interplate",
+  "dowel"
+ ],
+ "framing_note": "camera centre/height per joint and group from the extents of C elements of that group (+30 % margin), identical for all cases"
+}

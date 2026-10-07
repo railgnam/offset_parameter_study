@@ -1,0 +1,8 @@
+case,offset_mm,layers_joint,layers_main,role,status,note
+D0,0,0,10,test,generated,"B2's partition with B1's wind-only load: every substructure deck is B2's verbatim, the global deck is built from B1-GLOBAL"
+D1,30,1,9,test,solved,"4 load couplings move to the main substructure"
+D2,90,3,7,test,solved,"4 load couplings move to the main substructure"
+D3,150,5,5,test,solved,"every wall and slab load point lands exactly on the cut plane; the joint substructure owns them"
+D4,210,7,3,test,solved,
+D5,270,9,1,test,solved,
+D6,300,10,0,test,generated,"B1's partition and load: every deck line-identical to B1's, so its result must reproduce B1 to round-off"
