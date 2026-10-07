@@ -69,6 +69,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--tag', default='comparison')
     ap.add_argument('--cases', nargs='*')
+    ap.add_argument('--suffix', default='', help='appended to montage file names (several montage sets in one export)')
     ap.add_argument('--panel', type=int, default=1000, help='panel width in px (4 panels -> montage > 4000 px wide)')
     a = ap.parse_args()
     reg = snap.load_registry()
@@ -141,7 +142,7 @@ def main():
                     render['outside'][var][0], render['outside'][var][1], f_s, f_s, k)
         d.text((gap, head + ph + int(112 * k)), 'Free edges only, deformed shape x%g, last frame of the wind step, identical camera and colour limits. Runs: %s' % (
             render['deform_scale'], ', '.join('%s=%s' % (c, runs[c]) for c in cases if c in runs)), fill=(90, 90, 90), font=f_s)
-        canvas.save(os.path.join(out_dir, 'montage_%s_%s_%s.png' % (joint, group, view)))
+        canvas.save(os.path.join(out_dir, 'montage%s_%s_%s_%s.png' % (a.suffix, joint, group, view)))
         print('montage', joint, group, view, [c for c in cases if c in comp])
     print('wrote', out_dir)
 

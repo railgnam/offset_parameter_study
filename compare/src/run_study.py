@@ -111,7 +111,7 @@ def auto_limits(reg, rcfg):
     return out
 
 
-def contours(case, run_id, reg, force=False):
+def contours(case, run_id, reg, force=False, only_groups=None):
     run_dir = snap.run_dir(case, run_id)
     img_dir = os.path.join(run_dir, 'images')
     if glob.glob(os.path.join(img_dir, '*.png')) and not force:
@@ -162,6 +162,8 @@ def contours(case, run_id, reg, force=False):
             sh = shift.get(j, [0, 0, 0])
             framing.setdefault(j, {})[g] = {'center': [(a + b) / 2.0 + sh[k] for k, (a, b) in enumerate(zip(lo, hi))], 'height': round(h, 0)}
     rcfg['framing'] = framing
+    if only_groups:
+        rcfg['only_groups'] = only_groups
     os.makedirs(img_dir, exist_ok=True)
     for old in glob.glob(os.path.join(img_dir, '*.png')):          # stale layers of earlier group/view definitions
         os.remove(old)
@@ -189,6 +191,7 @@ def main():
     ap.add_argument('--force', action='store_true')
     ap.add_argument('--with-sim', action='store_true')
     ap.add_argument('--with-cae', action='store_true')
+    ap.add_argument('--no-montage', action='store_true')
     ap.add_argument('--tag', default='comparison')
     a = ap.parse_args()
     if a.all:
@@ -213,8 +216,9 @@ def main():
         for c, rid in runs.items():
             contours(c, rid, reg, a.force)
         import montage
-        sys.argv = ['montage.py', '--tag', a.tag]
-        montage.main()
+        if not a.no_montage:
+            sys.argv = ['montage.py', '--tag', a.tag, '--cases'] + list(runs)
+            montage.main()
     if a.compare:
         import compare
         sys.argv = ['compare.py', '--cases'] + [c for c in reg['order']] + ['--tag', a.tag]

@@ -86,7 +86,7 @@
    "status": "available",
    "step": "Step-2-WIND",
    "jobs": {
-    "global": "B1-GLOBAL-W500",
+    "global": "B1-GLOBAL",
     "substructures": [
      "M52B1",
      "M52B1main",
@@ -157,7 +157,7 @@
    "status": "available",
    "step": "Step-2-WIND",
    "jobs": {
-    "global": "B2-GLOBAL-W500",
+    "global": "B2-GLOBAL",
     "substructures": [
      "M5B2",
      "M52B2main",

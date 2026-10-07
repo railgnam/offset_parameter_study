@@ -6,6 +6,7 @@ work/
 compare/store/
 compare/exports/*
 !compare/exports/2026-10-07_zone_offset_c25/
+!compare/exports/2026-10-07_J3_images/
 
 # Abaqus and Python litter
 *.odb

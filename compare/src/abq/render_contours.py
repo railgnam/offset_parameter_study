@@ -95,6 +95,10 @@ for od_cfg in cfg['odbs']:
         box = (reg['joints'][jid]['box_min'], reg['joints'][jid]['box_max'])
         center = [(box[0][k] + box[1][k]) / 2.0 + cfg.get('camera_shift', {}).get(jid, [0, 0, 0])[k] for k in range(3)]
         for gname, g in cfg['groups'].items():
+            if cfg.get('only_groups') and gname not in cfg['only_groups']:
+                continue
+            if g.get('global_only'):
+                continue
             leaves = []
             for cls in g['classes']:
                 for inst, labs in sel.get((obase, jid, cls), {}).items():
@@ -151,6 +155,8 @@ for od_cfg in cfg['odbs']:
     # ---------------- global views: all GLM (timber) elements of the ODB, no joint boxes ----------------
     for gv in cfg.get('global_views', []):
         g = cfg['groups'][gv['group']]
+        if cfg.get('only_groups') and gv['group'] not in cfg['only_groups']:
+            continue
         var = g['variable']
         sets = []
         for iname, inst in odb.rootAssembly.instances.items():
@@ -169,7 +175,10 @@ for od_cfg in cfg['odbs']:
         for lf in leaves[1:]:
             od.displayGroup.add(leaf=lf)
         lo, hi = cfg['limits'][var]
-        od.setPrimaryVariable(variableLabel='S', outputPosition=INTEGRATION_POINT, refinement=(COMPONENT, var))
+        if var == 'U1':
+            od.setPrimaryVariable(variableLabel='U', outputPosition=NODAL, refinement=(COMPONENT, 'U1'))
+        else:
+            od.setPrimaryVariable(variableLabel='S', outputPosition=INTEGRATION_POINT, refinement=(COMPONENT, var))
         od.contourOptions.setValues(spectrum='spec_' + var, numIntervals=len(cfg['spectra'][var]), intervalType=UNIFORM,
                                     maxAutoCompute=OFF, maxValue=hi, minAutoCompute=OFF, minValue=lo, outsideLimitsMode=SPECIFY,
                                     outsideLimitsAboveColor=cfg['outside'][var][1], outsideLimitsBelowColor=cfg['outside'][var][0])
