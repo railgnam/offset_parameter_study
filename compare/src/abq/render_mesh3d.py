@@ -48,7 +48,7 @@ if 'displayGroupOdbToolset' not in sys.modules:
     __import__('displayGroupOdbToolset')
 dgo = sys.modules['displayGroupOdbToolset']
 od.display.setValues(plotState=(UNDEFORMED,))
-od.commonOptions.setValues(visibleEdges=ALL, edgeLineThickness=VERY_THIN, edgeColorWireHide='#707070', edgeColorFillShade='#707070')
+od.commonOptions.setValues(visibleEdges=ALL)
 leaves = [dgo.LeafFromElementLabels(partInstanceName=i, elementLabels=ranges(l)) for i, l in sel.items()]
 od.displayGroup.replace(leaf=leaves[0])
 for lf in leaves[1:]:

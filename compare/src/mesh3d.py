@@ -36,7 +36,7 @@ out = os.path.join(ROOT, 'exports', '%s_J3_images' % a.date, 'images', a.case)
 cfg = {'elem_csv': elem.replace('\\', '/'), 'odb': odb.replace('\\', '/'), 'joint': a.joint, 'out_dir': out.replace('\\', '/'),
        'size_px': [2400, 2000], 'colors': COLORS, 'opacity': a.opacity,
        'center': [(c + b) / 2.0 for c, b in zip(*ext)], 'view_height_mm': round(max(d[0], d[2]) * 1.25 + 80, 0),
-       'views': [{'name': 'front', 'view_vector': [0, 1, 0]}, {'name': 'rot3d', 'view_vector': [0.85, 1.0, -0.55]}]}
+       'views': [{'name': 'front', 'view_vector': [0, 1, 0]}, {'name': 'rot3d', 'view_vector': [0.45, 1.0, -0.30]}]}
 cp = os.path.join(rd, 'mesh3d_config.json')
 json.dump(cfg, open(cp, 'w'), indent=1)
 os.makedirs(out, exist_ok=True)
