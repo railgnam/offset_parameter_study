@@ -1,0 +1,5 @@
+section overrides 45 of 45 ['Section-DWL_M16-34__PICKEDSET26', 'Section-DWL_M16-35__PICKEDSET26', 'Section-DWL_M16-36__PICKEDSET26', 'Section-STEELPLATE_CORNER-0-50_S235', 'Section-STEELPLATE_INTER-0-51_S235', 'Section-STEELPLATE_INTER-1-52_S235']
+translucency ON 0.400000005960464
+wrote C:/Users/au686008/Claude/portalframe_model_fix/zone_offset/.claude/worktrees/mesh3d-d6/compare/exports/2026-10-07_J3_images/images/D6\J3_mesh_front.png
+wrote C:/Users/au686008/Claude/portalframe_model_fix/zone_offset/.claude/worktrees/mesh3d-d6/compare/exports/2026-10-07_J3_images/images/D6\J3_mesh_rot3d.png
+done
